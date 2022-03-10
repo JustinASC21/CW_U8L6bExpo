@@ -115,6 +115,46 @@ public class Encryptor
    */
   public String decryptMessage(String encryptedMessage)
   {
-    
+    int blockA = (numCols * numRows);
+    String totalMsg = "";
+    int ind = 0;
+    for (int loop = 0; loop < encryptedMessage.length() / blockA; loop ++) {
+      int end = ind + blockA;
+      totalMsg += readDecryption(decryptBlock(numRows,numCols,encryptedMessage.substring(ind,end)));
+      ind+= blockA;
+    }
+    return cleanStringDecryption(totalMsg);
   }
+
+  public String[][] decryptBlock(int col, int row, String msg) {
+    String[][] decryptedBlock = new String[row][col];
+    for (int c = 0; c < decryptedBlock[0].length; c++) {
+      for (int r = 0; r < decryptedBlock.length; r++) {
+        int index = c + (r * decryptedBlock[0].length);
+        decryptedBlock[r][c] = msg.substring(index, index +1);
+      }
+    }
+    return decryptedBlock;
+    // return in column major form, then read from up to down
+  }
+  public String readDecryption(String[][] decryptedBlock) {
+    String msg = "";
+    for (int c = 0; c < decryptedBlock[0].length; c++) {
+      for (int r = 0; r < decryptedBlock.length; r ++) {
+          msg += decryptedBlock[r][c];
+      }
+    }
+    return msg;
+  }
+
+  public String cleanStringDecryption(String decryptedString) {
+    int ind = decryptedString.length() - 1;
+    while (decryptedString.substring(ind-1,ind).equals("A")) {
+      decryptedString = decryptedString.substring(0,ind-1);
+      ind --;
+    }
+    return decryptedString;
+  }
+
+
 }

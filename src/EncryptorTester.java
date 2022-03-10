@@ -4,6 +4,7 @@ public class EncryptorTester
 {
   public static void main(String[] args)
   {
+    /*
     // --------------------------------
     // ---- TEST PART A: fillBlock ----
     // --------------------------------
@@ -220,7 +221,7 @@ public class EncryptorTester
       System.out.println("  ACTUAL: " + actualEncrypted5);
     }
 
-/*    
+
     // -------------------------------------
     // ---- TEST PART D: decryptMessage ----
     // -------------------------------------
@@ -294,6 +295,11 @@ public class EncryptorTester
       System.out.println("  ACTUAL: " + actualDecrypted6);
     }
 */
+    Encryptor encryptorFinal = new Encryptor(6,5);
+    String code = encryptorFinal.encryptMessage("This one time I was trying to do a handstand and fell backwards and landed on my shoe. It hurt! I won't try that again.");
+    System.out.println("Encrypted: " + code);
+    System.out.println("Decrypted: " + encryptorFinal.decryptMessage(code));
+
   }
   
   public static void print2DArray(String[][] arr)
