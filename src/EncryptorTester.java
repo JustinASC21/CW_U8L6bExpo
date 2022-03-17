@@ -1,4 +1,5 @@
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class EncryptorTester
 {
@@ -295,11 +296,13 @@ public class EncryptorTester
       System.out.println("  ACTUAL: " + actualDecrypted6);
     }
 */
-    Encryptor encryptorFinal = new Encryptor(6,5);
-    String code = encryptorFinal.encryptMessage("This one time I was trying to do a handstand and fell backwards and landed on my shoe. It hurt! I won't try that again.");
+    Encryptor encryptorFinal = new Encryptor(1,4);
+    Scanner sc = new Scanner(System.in);
+    String codeMsg = sc.nextLine();
+    String code = encryptorFinal.encryptMessage(codeMsg);
+    encryptorFinal.shiftByX(1);
     System.out.println("Encrypted: " + code);
     System.out.println("Decrypted: " + encryptorFinal.decryptMessage(code));
-
   }
   
   public static void print2DArray(String[][] arr)

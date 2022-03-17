@@ -1,5 +1,6 @@
 public class Encryptor
 {
+  private int strOrigLen;
   /** A two-dimensional array of single-character strings, instantiated in the constructor */
   private String[][] letterBlock;
 
@@ -15,6 +16,7 @@ public class Encryptor
     letterBlock = new String[r][c];
     numRows = r;
     numCols = c;
+    strOrigLen = 0;
   }
   
   public String[][] getLetterBlock()
@@ -62,6 +64,28 @@ public class Encryptor
     return enc;
   }
 
+  // shift by decimal number
+  public void shiftByX(int dec) {
+    for (int r = 0; r < letterBlock.length; r++) {
+      for (int c = 0; c < letterBlock[0].length; c++) {
+        char letter = letterBlock[r][c].charAt(0);
+        int newVal = (int) (letter) + dec;
+        if (newVal > 122) {
+          newVal -= 26;
+        }
+        else if (newVal < 97) {
+          newVal += 26;
+        }
+        String newLetter = Character.toString(newVal);
+        letterBlock[r][c] = newLetter;
+        System.out.println(newLetter);
+      }
+    }
+  }
+  //shift to the left
+  public void shiftLeft(int offset) {
+    for (int )
+  }
   /** Encrypts a message.
    *
    *  @param message the string to be encrypted
@@ -70,6 +94,7 @@ public class Encryptor
    */
   public String encryptMessage(String message)
   {
+    strOrigLen = message.length();
     // key is 8 / numCols * numRows
     String encrypted = "";
     int blockArea = (numCols * numRows);
@@ -148,9 +173,9 @@ public class Encryptor
   }
 
   public String cleanStringDecryption(String decryptedString) {
-    int ind = decryptedString.length() - 1;
+    int ind = decryptedString.length();
     while (decryptedString.substring(ind-1,ind).equals("A")) {
-      decryptedString = decryptedString.substring(0,ind-1);
+      decryptedString = decryptedString.substring(0,ind);
       ind --;
     }
     return decryptedString;
