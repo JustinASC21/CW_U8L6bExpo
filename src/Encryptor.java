@@ -83,8 +83,41 @@ public class Encryptor
     }
   }
   //shift to the left
-  public void shiftLeft(int offset) {
-    for (int )
+  public void shiftRow(int offset) {
+    String[][] startingCol = new String[numRows][numCols];
+    for (int c = 0; c < numCols; c++) {
+      for (int r = 0; r < numRows; r++) {
+        if (offset > 0) {
+        startingCol[r][(c + (offset % numCols)) % numCols] = letterBlock[r][c];
+        }
+        else {
+          startingCol[r][(numCols + (c + offset))% numCols] = letterBlock[r][c];
+        }
+      }
+    }
+    for (int c = 0; c < numCols; c ++) {
+      for (int r = 0; r < numRows; r++) {
+        letterBlock[r][c] = startingCol[r][c];
+      }
+    }
+  }
+  public void shiftCol(int offset) {
+    String[][] startingCol = new String[numRows][numCols];
+    for (int r = 0; r < numRows; r++) {
+      for (int c = 0; c < numCols; c++) {
+        if (offset > 0) {
+          startingCol[(r+ (offset % numRows)) % numRows][c] = letterBlock[r][c];
+        }
+        else {
+          startingCol[(numRows + (r + offset))% numRows][c] = letterBlock[r][c];
+        }
+      }
+    }
+    for (int c = 0; c < numCols; c ++) {
+      for (int r = 0; r < numRows; r++) {
+        letterBlock[r][c] = startingCol[r][c];
+      }
+    }
   }
   /** Encrypts a message.
    *

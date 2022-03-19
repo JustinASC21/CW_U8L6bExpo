@@ -296,11 +296,12 @@ public class EncryptorTester
       System.out.println("  ACTUAL: " + actualDecrypted6);
     }
 */
-    Encryptor encryptorFinal = new Encryptor(1,4);
+    Encryptor encryptorFinal = new Encryptor(3,3);
     Scanner sc = new Scanner(System.in);
     String codeMsg = sc.nextLine();
-    String code = encryptorFinal.encryptMessage(codeMsg);
-    encryptorFinal.shiftByX(1);
+    String code = encryptorFinal.encryptMessage("abcdefghi");
+    encryptorFinal.shiftCol(2);
+    print2DArray(encryptorFinal.getLetterBlock());
     System.out.println("Encrypted: " + code);
     System.out.println("Decrypted: " + encryptorFinal.decryptMessage(code));
   }
